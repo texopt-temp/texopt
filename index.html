@@ -1,29 +1,83 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
+  <!--
+    WARNING! Make sure that you match all Quasar related
+    tags to the same version! (Below it's "@2.17.4")
+  -->
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Unity</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.17.4/dist/quasar.prod.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
+
   <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Unity</div>
+    <!-- example of injection point where you write your app template -->
+    <div id="q-app" class="full-height">
+      <div class="q-pa-md full-height">
+        <q-layout view="lHh lpr lFf" class="full-height">
+          <q-header elevated>
+            <q-toolbar>
+              <q-toolbar-title>
+                Texture Optimization Demo
+              </q-toolbar-title>
+            </q-toolbar>
+          </q-header>
+    
+          <q-page-container>
+            <q-page padding class="full-height">
+              <q-card>
+                <q-card-section>
+                  <h6>
+                    This page provides an interactive demonstration of our <em>Iterative Texture Optimization for Non-Differentiable Renderers</em> approach, allowing the reviewers to explore the visual improvements it achieves in real-time.
+                  </h6>
+                    <div>
+                      <strong>Controls:</strong><br />
+                      - Drag <em>(LMB)</em> to rotate the model<br />
+                      - Scroll to dolly in/out<br />
+                      - Click "Optimize" or press <em>Space</em> to toggle optimized textures<br />
+                      - Select a scene from the panel on the left
+                    </div>
+                </q-card-section>
+                <div id="unity-container" class="unity-desktop">
+                  <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+                  <div id="unity-loading-bar">
+                    <div id="unity-logo"></div>
+                    <div id="unity-progress-bar-empty">
+                      <div id="unity-progress-bar-full"></div>
+                    </div>
+                  </div>
+                  <div id="unity-warning"> </div>
+                  <div id="unity-footer">
+                    <div id="unity-webgl-logo"></div>
+                    <div id="unity-fullscreen-button"></div>
+                    <div id="unity-build-title">Unity</div>
+                  </div>
+                </div>
+                          </q-card>
+            </q-page>
+          </q-page-container>
+        </q-layout>
       </div>
     </div>
+    
+    <!-- Add the following at the end of your body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.17.4/dist/quasar.umd.prod.js"></script>
+    
     <script>
+      /*
+        Example kicking off the UI. Obviously, adapt this to your specific needs.
+        Assumes you have a <div id="q-app"></div> in your <body> above
+       */
+      const app = Vue.createApp({
+        setup () {
+          return {}
+        }
+      })
+      app.use(Quasar)
+      app.mount('#q-app')
 
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -59,7 +113,7 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/UnityWebGLTest_uncomp.loader.js";
       var config = {
-        dataUrl: "https://media.githubusercontent.com/media/texopt-temp/texopt/main/Build/UnityWebGLTest_uncomp.data",
+        dataUrl: buildUrl + "/UnityWebGLTest_uncomp.data",
         frameworkUrl: buildUrl + "/UnityWebGLTest_uncomp.framework.js",
         codeUrl: buildUrl + "/UnityWebGLTest_uncomp.wasm",
         streamingAssetsUrl: "StreamingAssets",
@@ -116,7 +170,6 @@
             };
 
       document.body.appendChild(script);
-
     </script>
   </body>
 </html>
