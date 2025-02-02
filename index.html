@@ -34,13 +34,13 @@
                   </h6>
                     <div>
                       <strong>Controls:</strong><br />
-                      - Drag <em>(left mouse button)</em> to rotate the camera around the model<br />
+                      - Drag <em>(LMB)</em> to rotate the camera around the model<br />
                       - Scroll to dolly in/out<br />
                       - Click "Optimize" or press <em>Space</em> to toggle optimized textures<br />
                       - Select a scene from the panel on the left
                     </div>
                 </q-card-section>
-                <div id="unity-container" class="unity-desktop">
+                <div id="unity-container" style="width:960px;height:660px" class="full-width column items-center">
                   <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
                   <div id="unity-loading-bar">
                     <div id="unity-logo"></div>
@@ -55,7 +55,7 @@
                     <div id="unity-build-title">Unity</div>
                   </div>
                 </div>
-                          </q-card>
+              </q-card>
             </q-page>
           </q-page-container>
         </q-layout>
@@ -130,6 +130,7 @@
       // the canvas DOM size and WebGL render target sizes yourself.
       // config.matchWebGLToCanvasSize = false;
 
+      /*
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
 
@@ -151,6 +152,7 @@
         canvas.style.width = "960px";
         canvas.style.height = "600px";
       }
+      */
 
       loadingBar.style.display = "block";
 
